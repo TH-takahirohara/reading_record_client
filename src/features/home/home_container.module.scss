@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  height: 100px;
+  width: 100%;
+  background-color: #F1F3F6;
+  position: fixed;
+}
+
+.linkArea {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  padding-right: 32px;
+  color: #5c5c5c;
+  font-size: 20px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #5c5c5c;
+  font-size: 28px;
+}
