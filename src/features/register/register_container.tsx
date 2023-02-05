@@ -1,17 +1,29 @@
 import styles from '@/features/register/register_container.module.scss';
 import Head from 'next/head';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { postUser } from './apis/register_api';
 
 export const RegisterContainer = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errors, setErrors] = useState<string[]>([]);
+  const router = useRouter();
 
   const register = async () => {
-    const { user, error } = await postUser(name, email, password);
-    console.log(user);
-    console.log(error);
+    const { error } = await postUser(name, email, password);
+    if (error) {
+      const errors = [];
+      if (error.msg) errors.push(error.msg);
+      if (error.name) errors.push(`ユーザー名： ${error.name}`);
+      if (error.email) errors.push(`メールアドレス： ${error.email}`);
+      if (error.password) errors.push(`パスワード： ${error.password}`);
+      setErrors(errors);
+      return;
+    }
+
+    router.push('/after_registration');
   };
 
   return (
@@ -22,6 +34,13 @@ export const RegisterContainer = () => {
       </Head>
       <div className={styles.header}></div>
       <main className={styles.main}>
+        {errors.length !== 0 && (
+          <div className={styles.errors}>
+            {errors.map((errorText, idx) => (
+              <div key={idx}>{errorText}</div>
+            ))}
+          </div>
+        )}
         <div className={styles.form}>
           <div className={styles.inputWrapper}>
             <label htmlFor='name' className={styles.label}>

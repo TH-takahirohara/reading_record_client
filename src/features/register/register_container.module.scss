@@ -1,6 +1,4 @@
 .header {
-  display: flex;
-  justify-content: flex-end;
   height: 100px;
   width: 100%;
   background-color: #F1F3F6;
@@ -9,10 +7,18 @@
 
 .main {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #fff;
+}
+
+.errors {
+  border: 2px solid red;
+  padding: 16px;
+  color: red;
 }
 
 .form {

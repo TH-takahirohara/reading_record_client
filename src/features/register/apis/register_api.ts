@@ -14,10 +14,10 @@ interface IUser {
 }
 
 interface IRegisterError {
-  msg: string | null;
-  name: string | null;
-  email: string | null;
-  password: string | null;
+  msg: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 interface IRegisterResponse {
