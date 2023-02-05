@@ -5,7 +5,7 @@ export const fetcher = async <T = any>(url: string, option?: RequestInit): Promi
   return response.json();
 };
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export const requestApi = <T, U>(path: string, method: RequestMethod, body?: T) => {
   return fetcher<U>(`${Constants.shared().apiOrigin}${path}`, {
