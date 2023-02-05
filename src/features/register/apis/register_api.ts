@@ -8,10 +8,10 @@ interface IRegisterRequest {
 }
 
 interface IRegisterError {
-  msg: string;
-  name: string;
-  email: string;
-  password: string;
+  msg: string | null;
+  name: string | null;
+  email: string | null;
+  password: string | null;
 }
 
 interface IRegisterResponse {
@@ -34,8 +34,19 @@ export const postUser = async (name: string, email: string, password: string) =>
     return { user, error };
   } catch (error) {
     if (error instanceof Error) {
-      return { user: null, error: { msg: error.message } as IRegisterError };
+      return {
+        user: null,
+        error: { msg: error.message, name: null, email: null, password: null } as IRegisterError,
+      };
     }
-    return { user: null, error: { msg: 'エラーが発生しました' } as IRegisterError };
+    return {
+      user: null,
+      error: {
+        msg: 'エラーが発生しました',
+        name: null,
+        email: null,
+        password: null,
+      } as IRegisterError,
+    };
   }
 };
