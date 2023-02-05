@@ -1,16 +1,10 @@
+import { IUser } from '@/features/common/types/user';
 import { requestApi } from '@/utils/api';
 
 interface IRegisterRequest {
   name: string;
   email: string;
   password: string;
-}
-
-interface IUser {
-  id: number;
-  name: string;
-  email: string;
-  activated: boolean;
 }
 
 interface IRegisterError {
