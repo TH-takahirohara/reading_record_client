@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { postUser } from './apis/register_api';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
+import { InputComponent } from '../common/components/input_component';
 
 export const RegisterContainer = () => {
   const [name, setName] = useState<string>('');
@@ -42,45 +43,27 @@ export const RegisterContainer = () => {
           </div>
         )}
         <div className={styles.form}>
-          <div className={styles.inputWrapper}>
-            <label htmlFor='name' className={styles.label}>
-              ユーザー名
-            </label>
-            <input
-              type='text'
-              name='name'
-              id='name'
-              className={styles.input}
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor='email' className={styles.label}>
-              メールアドレス
-            </label>
-            <input
-              type='email'
-              name='email'
-              id='email'
-              className={styles.input}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
-          <div className={styles.inputWrapper}>
-            <label htmlFor='password' className={styles.label}>
-              パスワード
-            </label>
-            <input
-              type='password'
-              name='password'
-              id='password'
-              className={styles.input}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
+          <InputComponent
+            id='name'
+            type='text'
+            labelText='ユーザー名'
+            value={name}
+            setFunc={setName}
+          />
+          <InputComponent
+            id='email'
+            type='email'
+            labelText='メールアドレス'
+            value={email}
+            setFunc={setEmail}
+          />
+          <InputComponent
+            id='password'
+            type='password'
+            labelText='パスワード'
+            value={password}
+            setFunc={setPassword}
+          />
           <button className={styles.button} onClick={register}>
             登録
           </button>

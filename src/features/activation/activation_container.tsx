@@ -2,6 +2,7 @@ import styles from '@/features/activation/activation_container.module.scss';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { InputComponent } from '../common/components/input_component';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import { putToken } from './apis/activation_api';
 
@@ -37,19 +38,13 @@ export const ActivationContainer = () => {
             ))}
           </div>
         )}
-        <div className={styles.inputWrapper}>
-          <label htmlFor='activation' className={styles.label}>
-            トークン文字列
-          </label>
-          <input
-            type='text'
-            name='activation'
-            id='activation'
-            className={styles.input}
-            value={token}
-            onChange={e => setToken(e.target.value)}
-          />
-        </div>
+        <InputComponent
+          id='token'
+          type='text'
+          labelText='トークン文字列'
+          value={token}
+          setFunc={setToken}
+        />
         <button className={styles.button} onClick={sendToken}>
           送信
         </button>
