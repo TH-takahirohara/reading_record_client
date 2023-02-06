@@ -20,8 +20,11 @@
 
 .main {
   display: flex;
+  flex-direction: column;
+  gap: 24px;
   justify-content: center;
   align-items: center;
   min-height: 90vh;
   background-color: #fff;
+  color: #5c5c5c;
 }
