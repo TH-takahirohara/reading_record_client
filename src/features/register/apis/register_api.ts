@@ -36,17 +36,12 @@ export const postUser = async (name: string, email: string, password: string) =>
     if (error instanceof Error) {
       return {
         user: null,
-        error: { msg: error.message, name: null, email: null, password: null } as IRegisterError,
+        error: { msg: error.message } as IRegisterError,
       };
     }
     return {
       user: null,
-      error: {
-        msg: 'エラーが発生しました',
-        name: null,
-        email: null,
-        password: null,
-      } as IRegisterError,
+      error: { msg: 'エラーが発生しました' } as IRegisterError,
     };
   }
 };

@@ -28,8 +28,8 @@ export const putToken = async (token: string) => {
     return { user, error };
   } catch (error) {
     if (error instanceof Error) {
-      return { user: null, error: { msg: error.message, token: null } as IActivationError };
+      return { user: null, error: { msg: error.message } as IActivationError };
     }
-    return { user: null, error: { msg: 'エラーが発生しました', token: null } as IActivationError };
+    return { user: null, error: { msg: 'エラーが発生しました' } as IActivationError };
   }
 };
