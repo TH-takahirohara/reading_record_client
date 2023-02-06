@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { postUser } from './apis/register_api';
+import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 
 export const RegisterContainer = () => {
   const [name, setName] = useState<string>('');
@@ -32,8 +33,7 @@ export const RegisterContainer = () => {
         <title>読書記録アプリ - 登録</title>
         <link rel='icon' href='/images/logo.png' />
       </Head>
-      <div className={styles.header}></div>
-      <main className={styles.main}>
+      <RootWrapperComponent>
         {errors.length !== 0 && (
           <div className={styles.errors}>
             {errors.map((errorText, idx) => (
@@ -85,7 +85,7 @@ export const RegisterContainer = () => {
             登録
           </button>
         </div>
-      </main>
+      </RootWrapperComponent>
     </>
   );
 };

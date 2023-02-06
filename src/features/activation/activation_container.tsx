@@ -1,6 +1,7 @@
 import styles from '@/features/activation/activation_container.module.scss';
 import Head from 'next/head';
 import { useState } from 'react';
+import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import { putToken } from './apis/activation_api';
 
 export const ActivationContainer = () => {
@@ -26,8 +27,7 @@ export const ActivationContainer = () => {
         <title>読書記録アプリ - アクティベーション</title>
         <link rel='icon' href='/images/logo.png' />
       </Head>
-      <div className={styles.header}></div>
-      <main className={styles.main}>
+      <RootWrapperComponent>
         {errors.length !== 0 && (
           <div className={styles.errors}>
             {errors.map((errorText, idx) => (
@@ -51,7 +51,7 @@ export const ActivationContainer = () => {
         <button className={styles.button} onClick={sendToken}>
           送信
         </button>
-      </main>
+      </RootWrapperComponent>
     </>
   );
 };
