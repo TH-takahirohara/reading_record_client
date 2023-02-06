@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  height: 10vh;
+  background-color: #F1F3F6;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.linkArea {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  padding-right: 32px;
+  color: #5c5c5c;
+  font-size: 20px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #fff;
+}
