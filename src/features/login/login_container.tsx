@@ -1,4 +1,4 @@
-import styles from '@/features/register/register_container.module.scss';
+import styles from '@/features/login/login_container.module.scss';
 import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
