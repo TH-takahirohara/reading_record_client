@@ -1,5 +1,6 @@
 import styles from '@/features/activation/activation_container.module.scss';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import { putToken } from './apis/activation_api';
@@ -7,6 +8,7 @@ import { putToken } from './apis/activation_api';
 export const ActivationContainer = () => {
   const [token, setToken] = useState<string>('');
   const [errors, setErrors] = useState<string[]>([]);
+  const router = useRouter();
 
   const sendToken = async () => {
     const { error } = await putToken(token);
@@ -18,7 +20,7 @@ export const ActivationContainer = () => {
       return;
     }
 
-    // TODO: アクティベーション成功後のページに遷移する
+    router.push('/after_activation');
   };
 
   return (
