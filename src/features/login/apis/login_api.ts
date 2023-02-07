@@ -17,13 +17,13 @@ interface ILoginError {
 }
 
 interface ILoginResponse {
-  authentication_token: IToken;
+  authenticationToken: IToken;
   error: ILoginError;
 }
 
 export const postLoginInfo = async (email: string, password: string) => {
   try {
-    const { authentication_token: token, error } = await requestApi<ILoginRequest, ILoginResponse>(
+    const { authenticationToken: token, error } = await requestApi<ILoginRequest, ILoginResponse>(
       '/v1/tokens/authentication',
       'POST',
       {
