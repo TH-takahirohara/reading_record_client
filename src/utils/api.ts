@@ -8,7 +8,7 @@ export const fetcher = async <T = any>(url: string, option?: RequestInit): Promi
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export const requestApi = <T, U>(path: string, method: RequestMethod, body?: T) => {
-  return fetcher<U>(`${Constants.shared().apiOrigin}${path}`, {
+  return fetcher<U>(`${process.env.NEXT_PUBLIC_API_ORIGIN}${path}`, {
     method,
     body: JSON.stringify(body),
     headers: {
