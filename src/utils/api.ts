@@ -1,5 +1,3 @@
-import { Constants } from '@/constants/constants';
-
 export const fetcher = async <T = any>(url: string, option?: RequestInit): Promise<T> => {
   const response = await fetch(url, option);
   return response.json();
