@@ -11,6 +11,16 @@ export const requestApi = <T, U>(path: string, method: RequestMethod, body?: T) 
     body: JSON.stringify(body),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
+};
+
+export const requestApiWithAuth = <T, U>(path: string, method: RequestMethod, body?: T) => {
+  return fetcher<U>(`${process.env.NEXT_PUBLIC_API_ORIGIN}${path}`, {
+    method,
+    body: JSON.stringify(body),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
       Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     },
   });
