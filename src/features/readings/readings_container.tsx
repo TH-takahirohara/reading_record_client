@@ -10,13 +10,17 @@ export const ReadingsContainer = () => {
   const [readings, setReadings] = useState<IReading[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [pageCount, setPageCount] = useState<number>(0);
-  const [error, setError] = useState<string>('');
+  const [errors, setErrors] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
       const { metadata, readings, error } = await getReadings(currentPage + 1);
       if (error) {
-        setError(error.msg || error.page || error.pageSize);
+        const errors = [];
+        if (error.msg) errors.push(error.msg);
+        if (error.page) errors.push(error.page);
+        if (error.pageSize) errors.push(error.pageSize);
+        setErrors(errors);
         return;
       }
 
@@ -52,18 +56,27 @@ export const ReadingsContainer = () => {
         <link rel='icon' href='/images/logo.png' />
       </Head>
       <RootWrapperComponent>
-        <ReadingsComponent />
-        <ReactPaginate
-          className={styles.paginate}
-          pageCount={pageCount}
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={3}
-          marginPagesDisplayed={2}
-          previousLabel='<'
-          nextLabel='>'
-          activeClassName={styles.active}
-          breakLabel='...'
-        />
+        <>
+          {errors.length !== 0 && (
+            <div className={styles.errors}>
+              {errors.map((errorText, idx) => (
+                <div key={idx}>{errorText}</div>
+              ))}
+            </div>
+          )}
+          <ReadingsComponent />
+          <ReactPaginate
+            className={styles.paginate}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            previousLabel='<'
+            nextLabel='>'
+            activeClassName={styles.active}
+            breakLabel='...'
+          />
+        </>
       </RootWrapperComponent>
     </>
   );
