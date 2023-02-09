@@ -23,7 +23,8 @@ export const LoginContainer = () => {
       return;
     }
 
-    // TODO: トークンの保存処理、および読書記録一覧画面への遷移処理
+    localStorage.setItem('authToken', token.token);
+    router.push('/readings');
   };
 
   return (
