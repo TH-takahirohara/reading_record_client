@@ -5,6 +5,7 @@ import { RootWrapperComponent } from '../common/components/root_wrapper_componen
 import ReactPaginate from 'react-paginate';
 import { getReadings } from './apis/readings_api';
 import { IReading } from '../common/types/common';
+import { ReadingItemComponent } from './components/reading_item_component';
 
 export const ReadingsContainer = () => {
   const [readings, setReadings] = useState<IReading[]>([]);
@@ -34,12 +35,7 @@ export const ReadingsContainer = () => {
       <>
         {readings.length > 0 &&
           readings.map(r => {
-            return (
-              <>
-                <div>{r.bookName}</div>
-                <div>{r.bookAuthor}</div>
-              </>
-            );
+            return <ReadingItemComponent reaading={r} />;
           })}
       </>
     );
