@@ -37,7 +37,7 @@ export const createReading = async (
     return { reading, error };
   } catch (err) {
     return {
-      reading: {} as ICreateReadingResponse,
+      reading: {} as IReading,
       error: { msg: 'エラーが発生しました' } as IReadingFormError,
     };
   }
