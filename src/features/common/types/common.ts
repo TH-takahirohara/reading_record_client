@@ -5,7 +5,7 @@ export interface IReading {
   totalPageCount: number;
   currentPage: number;
   memo: string;
-  dailyProgresses: IDailyProgress | null;
+  dailyProgresses: IDailyProgress[];
 }
 
 export interface IDailyProgress {
