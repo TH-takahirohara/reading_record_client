@@ -88,6 +88,9 @@ export const ReadingDetailContainer = (props: IProps) => {
             x: {
               type: 'time',
               time: {
+                displayFormats: {
+                  day: 'yyyy-MM-dd',
+                },
                 unit: 'day',
               },
               offset: true,
@@ -97,7 +100,7 @@ export const ReadingDetailContainer = (props: IProps) => {
               max: Math.min(readingParam.totalPageCount, Math.max(...yPages) + 10),
               title: {
                 display: true,
-                text: '読み進めたページ数',
+                text: 'ページ数',
               },
             },
           },
