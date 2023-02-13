@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
-import { getReading } from './apis/reading_detail_api';
+import { getReading, postDailyProgress } from './apis/reading_detail_api';
 import { IReading } from '@/features/common/types/common';
 import styles from '@/features/reading_detail/reading_detail_container.module.scss';
 import { ProgressGraphComponent } from './components/progress_graph_component';
+import { format } from 'date-fns';
 
 interface IProps {
   readingId: number;
@@ -35,6 +36,92 @@ export const ReadingDetailContainer = (props: IProps) => {
     })();
   }, []);
 
+  const DailyProgressCreateComponent = () => {
+    const [newProgressDate, setNewProgressDate] = useState<string>(
+      format(new Date(), 'yyyy-MM-dd'),
+    );
+    const [newProgressPage, setNewProgressPage] = useState<string>('');
+
+    const sendNewProgress = async () => {
+      const errors = [];
+      if (
+        readingParam.dailyProgresses.length > 0 &&
+        new Date(readingParam.dailyProgresses.slice(-1)[0].readDate) >= new Date(newProgressDate)
+      ) {
+        errors.push('日付欄には直近で記録した日付より新しい日付を入力してください。');
+      }
+
+      const newProgressPageNum = parseInt(newProgressPage);
+      if (isNaN(newProgressPageNum)) {
+        errors.push('ページ番号欄には整数値を入力してください。');
+      } else if (newProgressPageNum < 1) {
+        errors.push('ページ番号欄には0より大きい値を入力してください。');
+      } else if (newProgressPageNum > readingParam.totalPageCount) {
+        errors.push('ページ番号欄には総ページ数以下の値を入力してください。');
+      } else if (
+        readingParam.dailyProgresses.length > 0 &&
+        readingParam.dailyProgresses.slice(-1)[0].readPage >= newProgressPageNum
+      ) {
+        errors.push('ページ番号には直近で記録したページ番号より大きい値を入力してください。');
+      }
+
+      if (errors.length > 0) {
+        setErrors(errors);
+        return;
+      }
+
+      const { dailyProgress, error } = await postDailyProgress(
+        readingParam.id,
+        newProgressDate,
+        newProgressPageNum,
+      );
+      if (error) {
+        const errors = [];
+        if (error.msg) errors.push(error.msg);
+        if (error.readDate) errors.push(`日付欄: ${error.readDate}`);
+        if (error.readPage) errors.push(`ページ番号欄: ${error.readPage}`);
+        setErrors(errors);
+        return;
+      }
+
+      setErrors([]);
+      setReadingParam({
+        ...readingParam,
+        dailyProgresses: [...readingParam.dailyProgresses, dailyProgress],
+      });
+    };
+
+    return (
+      <div>
+        <div className={styles.inputWrapper}>
+          <label htmlFor='progressDate' className={styles.label}>
+            日付
+          </label>
+          <input
+            type='date'
+            name='progressDate'
+            id='progressDate'
+            value={newProgressDate}
+            onChange={e => setNewProgressDate(e.target.value)}
+          />
+        </div>
+        <div className={styles.inputWrapper}>
+          <label htmlFor='page' className={styles.label}>
+            ページ番号
+          </label>
+          <input
+            type='text'
+            name='page'
+            id='page'
+            value={newProgressPage}
+            onChange={e => setNewProgressPage(e.target.value)}
+          />
+        </div>
+        <button onClick={sendNewProgress}>追加する</button>
+      </div>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -57,6 +144,7 @@ export const ReadingDetailContainer = (props: IProps) => {
           <div>著者</div>
           <div>{readingParam.bookAuthor}</div>
         </div>
+        <DailyProgressCreateComponent />
         <ProgressGraphComponent reading={readingParam} />
       </RootWrapperComponent>
     </>
