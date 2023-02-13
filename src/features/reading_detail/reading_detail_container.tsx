@@ -43,28 +43,7 @@ export const ReadingDetailContainer = (props: IProps) => {
     const [newProgressPage, setNewProgressPage] = useState<string>('');
 
     const sendNewProgress = async () => {
-      const errors = [];
-      if (
-        readingParam.dailyProgresses.length > 0 &&
-        new Date(readingParam.dailyProgresses.slice(-1)[0].readDate) >= new Date(newProgressDate)
-      ) {
-        errors.push('日付欄には直近で記録した日付より新しい日付を入力してください。');
-      }
-
-      const newProgressPageNum = parseInt(newProgressPage);
-      if (isNaN(newProgressPageNum)) {
-        errors.push('ページ番号欄には整数値を入力してください。');
-      } else if (newProgressPageNum < 1) {
-        errors.push('ページ番号欄には0より大きい値を入力してください。');
-      } else if (newProgressPageNum > readingParam.totalPageCount) {
-        errors.push('ページ番号欄には総ページ数以下の値を入力してください。');
-      } else if (
-        readingParam.dailyProgresses.length > 0 &&
-        readingParam.dailyProgresses.slice(-1)[0].readPage >= newProgressPageNum
-      ) {
-        errors.push('ページ番号には直近で記録したページ番号より大きい値を入力してください。');
-      }
-
+      const { newProgressPageNum, errors } = validateNewProgress();
       if (errors.length > 0) {
         setErrors(errors);
         return;
@@ -89,6 +68,32 @@ export const ReadingDetailContainer = (props: IProps) => {
         ...readingParam,
         dailyProgresses: [...readingParam.dailyProgresses, dailyProgress],
       });
+    };
+
+    const validateNewProgress = () => {
+      const errors = [];
+      if (
+        readingParam.dailyProgresses.length > 0 &&
+        new Date(readingParam.dailyProgresses.slice(-1)[0].readDate) >= new Date(newProgressDate)
+      ) {
+        errors.push('日付欄: 直近で記録した日付より新しい日付を入力してください。');
+      }
+
+      const newProgressPageNum = parseInt(newProgressPage);
+      if (isNaN(newProgressPageNum)) {
+        errors.push('ページ番号欄: 整数値を入力してください。');
+      } else if (newProgressPageNum < 1) {
+        errors.push('ページ番号欄: 0より大きい値を入力してください。');
+      } else if (newProgressPageNum > readingParam.totalPageCount) {
+        errors.push('ページ番号欄: 総ページ数以下の値を入力してください。');
+      } else if (
+        readingParam.dailyProgresses.length > 0 &&
+        readingParam.dailyProgresses.slice(-1)[0].readPage >= newProgressPageNum
+      ) {
+        errors.push('ページ番号欄: 直近で記録したページ番号より大きい値を入力してください。');
+      }
+
+      return { newProgressPageNum, errors };
     };
 
     return (
