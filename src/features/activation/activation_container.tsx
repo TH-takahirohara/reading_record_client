@@ -2,6 +2,7 @@ import styles from '@/features/activation/activation_container.module.scss';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { ButtonComponent } from '../common/components/button_component';
 import { InputComponent } from '../common/components/input_component';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import { putToken } from './apis/activation_api';
@@ -45,9 +46,7 @@ export const ActivationContainer = () => {
           value={token}
           setFunc={setToken}
         />
-        <button className={styles.button} onClick={sendToken}>
-          送信
-        </button>
+        <ButtonComponent title='送信' onClick={sendToken} />
       </RootWrapperComponent>
     </>
   );

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import { InputComponent } from '../common/components/input_component';
 import { postLoginInfo } from './apis/login_api';
+import { ButtonComponent } from '../common/components/button_component';
 
 export const LoginContainer = () => {
   const [email, setEmail] = useState<string>('');
@@ -56,9 +57,7 @@ export const LoginContainer = () => {
             value={password}
             setFunc={setPassword}
           />
-          <button className={styles.button} onClick={login}>
-            ログイン
-          </button>
+          <ButtonComponent title='ログイン' onClick={login} />
         </div>
       </RootWrapperComponent>
     </>

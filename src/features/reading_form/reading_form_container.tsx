@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { RootWrapperComponent } from '@/features/common/components/root_wrapper_component';
 import styles from '@/features/reading_form/reading_form_container.module.scss';
 import { createReading } from './apis/reading_form_api';
+import { ButtonComponent } from '../common/components/button_component';
 
 export const ReadingFormContainer = () => {
   const [title, setTitle] = useState<string>('');
@@ -76,9 +77,7 @@ export const ReadingFormContainer = () => {
           value={totalPageCount}
           setFunc={setTotalPageCount}
         />
-        <button className={styles.button} onClick={create}>
-          作成
-        </button>
+        <ButtonComponent title='作成' onClick={create} />
       </RootWrapperComponent>
     </>
   );

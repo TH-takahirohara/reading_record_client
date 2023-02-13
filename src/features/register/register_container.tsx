@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { postUser } from './apis/register_api';
 import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import { InputComponent } from '../common/components/input_component';
+import { ButtonComponent } from '../common/components/button_component';
 
 export const RegisterContainer = () => {
   const [name, setName] = useState<string>('');
@@ -64,9 +65,7 @@ export const RegisterContainer = () => {
             value={password}
             setFunc={setPassword}
           />
-          <button className={styles.button} onClick={register}>
-            登録
-          </button>
+          <ButtonComponent title='登録' onClick={register} />
         </div>
       </RootWrapperComponent>
     </>
