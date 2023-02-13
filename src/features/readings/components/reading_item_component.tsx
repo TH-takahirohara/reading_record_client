@@ -10,7 +10,7 @@ export const ReadingItemComponent = (props: IProps) => {
 
   const readRate = () => {
     const place = 10;
-    return Math.round((currentPage / totalPageCount) * 100 * place) / place;
+    return Math.floor((currentPage / totalPageCount) * 100 * place) / place;
   };
 
   return (
