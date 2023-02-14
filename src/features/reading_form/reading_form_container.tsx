@@ -1,7 +1,5 @@
 import { InputComponent } from '@/features/common/components/input_component';
-import Head from 'next/head';
 import { useState } from 'react';
-import { RootWrapperComponent } from '@/features/common/components/root_wrapper_component';
 import styles from '@/features/reading_form/reading_form_container.module.scss';
 import { createReading } from './apis/reading_form_api';
 import { ButtonComponent } from '../common/components/button_component';
@@ -43,42 +41,30 @@ export const ReadingFormContainer = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>読書記録アプリ - 読書記録の新規作成</title>
-        <link rel='icon' href='/images/logo.png' />
-      </Head>
-      <RootWrapperComponent>
-        {errors.length !== 0 && (
-          <div className={styles.errors}>
-            {errors.map((errorText, idx) => (
-              <div key={idx}>{errorText}</div>
-            ))}
-          </div>
-        )}
-        <InputComponent
-          id='title'
-          type='text'
-          labelText='タイトル'
-          value={title}
-          setFunc={setTitle}
-        />
-        <InputComponent
-          id='author'
-          type='text'
-          labelText='著者'
-          value={author}
-          setFunc={setAuthor}
-        />
-        <InputComponent
-          id='total_page_count'
-          type='text'
-          labelText='総ページ数'
-          value={totalPageCount}
-          setFunc={setTotalPageCount}
-        />
-        <ButtonComponent title='作成' onClick={create} />
-      </RootWrapperComponent>
-    </>
+    <div className={styles.root}>
+      {errors.length !== 0 && (
+        <div className={styles.errors}>
+          {errors.map((errorText, idx) => (
+            <div key={idx}>{errorText}</div>
+          ))}
+        </div>
+      )}
+      <InputComponent
+        id='title'
+        type='text'
+        labelText='タイトル'
+        value={title}
+        setFunc={setTitle}
+      />
+      <InputComponent id='author' type='text' labelText='著者' value={author} setFunc={setAuthor} />
+      <InputComponent
+        id='total_page_count'
+        type='text'
+        labelText='総ページ数'
+        value={totalPageCount}
+        setFunc={setTotalPageCount}
+      />
+      <ButtonComponent title='作成' onClick={create} />
+    </div>
   );
 };

@@ -1,7 +1,5 @@
 import styles from '@/features/readings/readings_container.module.scss';
-import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import { RootWrapperComponent } from '../common/components/root_wrapper_component';
 import ReactPaginate from 'react-paginate';
 import { getReadings } from './apis/readings_api';
 import { IReading } from '../common/types/common';
@@ -47,33 +45,25 @@ export const ReadingsContainer = () => {
 
   return (
     <>
-      <Head>
-        <title>読書記録アプリ - 読書記録一覧</title>
-        <link rel='icon' href='/images/logo.png' />
-      </Head>
-      <RootWrapperComponent>
-        <>
-          {errors.length !== 0 && (
-            <div className={styles.errors}>
-              {errors.map((errorText, idx) => (
-                <div key={idx}>{errorText}</div>
-              ))}
-            </div>
-          )}
-          <ReadingsComponent />
-          <ReactPaginate
-            className={styles.paginate}
-            pageCount={pageCount}
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            previousLabel='<'
-            nextLabel='>'
-            activeClassName={styles.active}
-            breakLabel='...'
-          />
-        </>
-      </RootWrapperComponent>
+      {errors.length !== 0 && (
+        <div className={styles.errors}>
+          {errors.map((errorText, idx) => (
+            <div key={idx}>{errorText}</div>
+          ))}
+        </div>
+      )}
+      <ReadingsComponent />
+      <ReactPaginate
+        className={styles.paginate}
+        pageCount={pageCount}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        previousLabel='<'
+        nextLabel='>'
+        activeClassName={styles.active}
+        breakLabel='...'
+      />
     </>
   );
 };

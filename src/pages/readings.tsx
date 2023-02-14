@@ -1,14 +1,12 @@
+import { UserLayout } from '@/features/common/components/user_layout';
 import { ReadingsContainer } from '@/features/readings/readings_container';
-import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
+import { ReactElement } from 'react';
+import { NextPageWithLayout } from './_app';
 
-const ReadingsPage: NextPage = () => <ReadingsContainer />;
+const ReadingsPage: NextPageWithLayout = () => <ReadingsContainer />;
 
-const DynamicReadingsPage = dynamic(
-  {
-    loader: async () => ReadingsPage,
-  },
-  { ssr: false },
-);
+ReadingsPage.getLayout = function getLayout(page: ReactElement) {
+  return <UserLayout subtitle='読書記録一覧'>{page}</UserLayout>;
+};
 
-export default DynamicReadingsPage;
+export default ReadingsPage;

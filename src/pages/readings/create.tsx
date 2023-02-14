@@ -1,14 +1,12 @@
+import { UserLayout } from '@/features/common/components/user_layout';
 import { ReadingFormContainer } from '@/features/reading_form/reading_form_container';
-import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
+import { ReactElement } from 'react';
+import { NextPageWithLayout } from '../_app';
 
-const ReadingsCreatePage: NextPage = () => <ReadingFormContainer />;
+const ReadingsCreatePage: NextPageWithLayout = () => <ReadingFormContainer />;
 
-const DynamicReadingsCreatePage = dynamic(
-  {
-    loader: async () => ReadingsCreatePage,
-  },
-  { ssr: false },
-);
+ReadingsCreatePage.getLayout = function getLayout(page: ReactElement) {
+  return <UserLayout subtitle='読書記録の新規作成'>{page}</UserLayout>;
+};
 
-export default DynamicReadingsCreatePage;
+export default ReadingsCreatePage;

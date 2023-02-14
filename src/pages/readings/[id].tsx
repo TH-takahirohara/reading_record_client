@@ -1,9 +1,10 @@
+import { UserLayout } from '@/features/common/components/user_layout';
 import { ReadingDetailContainer } from '@/features/reading_detail/reading_detail_container';
-import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
+import { NextPageWithLayout } from '../_app';
 
-const ReadingPage: NextPage = () => {
+const ReadingPage: NextPageWithLayout = () => {
   const router = useRouter();
   const { id: readingId } = router.query;
   const readingIdNum = !readingId || isNaN(+readingId) ? undefined : +readingId;
@@ -17,6 +18,10 @@ const ReadingPage: NextPage = () => {
   }, [router.isReady]);
 
   return readingIdNum ? <ReadingDetailContainer readingId={readingIdNum} /> : null;
+};
+
+ReadingPage.getLayout = function getLayout(page: ReactElement) {
+  return <UserLayout subtitle='読書記録詳細'>{page}</UserLayout>;
 };
 
 export default ReadingPage;
