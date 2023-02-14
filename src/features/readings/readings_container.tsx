@@ -44,7 +44,7 @@ export const ReadingsContainer = () => {
   };
 
   return (
-    <>
+    <div className={styles.root}>
       {errors.length !== 0 && (
         <div className={styles.errors}>
           {errors.map((errorText, idx) => (
@@ -64,6 +64,6 @@ export const ReadingsContainer = () => {
         activeClassName={styles.active}
         breakLabel='...'
       />
-    </>
+    </div>
   );
 };
