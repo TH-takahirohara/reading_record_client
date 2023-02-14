@@ -65,6 +65,7 @@ export const ReadingDetailContainer = (props: IProps) => {
       setReadingParam({
         ...readingParam,
         dailyProgresses: [...readingParam.dailyProgresses, dailyProgress],
+        currentPage: dailyProgress.readPage,
       });
     };
 
@@ -166,7 +167,9 @@ export const ReadingDetailContainer = (props: IProps) => {
         </div>
       </div>
       <DailyProgressCreateComponent />
-      <ProgressGraphComponent reading={readingParam} />
+      {readingParam.dailyProgresses.length === 0 ? null : (
+        <ProgressGraphComponent reading={readingParam} />
+      )}
     </div>
   );
 };

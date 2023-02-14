@@ -66,7 +66,7 @@ export const ProgressGraphComponent = (props: IProps) => {
           },
           y: {
             beginAtZero: true,
-            max: Math.min(reading.totalPageCount, Math.max(...yPages) + 10),
+            max: Math.min(reading.totalPageCount, reading.currentPage + 10),
             title: {
               display: true,
               text: 'ページ数',
