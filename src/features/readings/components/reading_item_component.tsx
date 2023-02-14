@@ -16,21 +16,19 @@ export const ReadingItemComponent = (props: IProps) => {
 
   return (
     <Link href={`/readings/${id}`} className={styles.root}>
-      <div className={styles.col}>
-        <div>タイトル</div>
-        <div className={styles.value}>{bookName}</div>
+      <div className={`${styles.col} ${styles.titleAndAuthor}`}>
+        <div>タイトル / 著者</div>
+        <div className={styles.value}>
+          {bookName} / {bookAuthor}
+        </div>
       </div>
-      <div className={styles.col}>
-        <div>著者</div>
-        <div className={styles.value}>{bookAuthor}</div>
-      </div>
-      <div className={styles.col}>
+      <div className={`${styles.col} ${styles.other}`}>
         <div>現在のページ / 総ページ数</div>
         <div className={styles.value}>
           {currentPage}p / {totalPageCount}p
         </div>
       </div>
-      <div className={styles.col}>
+      <div className={`${styles.col} ${styles.other}`}>
         <div>読み終えた割合</div>
         <div className={styles.value}>{readRate()}%</div>
       </div>
