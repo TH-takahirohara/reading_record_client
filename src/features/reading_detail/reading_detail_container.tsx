@@ -95,12 +95,13 @@ export const ReadingDetailContainer = (props: IProps) => {
     };
 
     return (
-      <div>
+      <div className={styles.addingContainer}>
         <div className={styles.inputWrapper}>
           <label htmlFor='progressDate' className={styles.label}>
             日付
           </label>
           <input
+            className={styles.input}
             type='date'
             name='progressDate'
             id='progressDate'
@@ -113,6 +114,7 @@ export const ReadingDetailContainer = (props: IProps) => {
             ページ番号
           </label>
           <input
+            className={styles.input}
             type='text'
             name='page'
             id='page'
@@ -120,13 +122,31 @@ export const ReadingDetailContainer = (props: IProps) => {
             onChange={e => setNewProgressPage(e.target.value)}
           />
         </div>
-        <button onClick={sendNewProgress}>追加する</button>
+        <button className={styles.button} onClick={sendNewProgress}>
+          追加
+        </button>
+      </div>
+    );
+  };
+
+  const readRate = () => {
+    const place = 10;
+    return (
+      Math.floor((readingParam.currentPage / readingParam.totalPageCount) * 100 * place) / place
+    );
+  };
+
+  const DetailItemComponent = (props: { labelText: string; value: string }) => {
+    return (
+      <div className={styles.itemContainer}>
+        <div>{props.labelText}</div>
+        <div className={styles.itemValue}>{props.value}</div>
       </div>
     );
   };
 
   return (
-    <>
+    <div className={styles.root}>
       {errors.length !== 0 && (
         <div className={styles.errors}>
           {errors.map((errorText, idx) => (
@@ -134,16 +154,19 @@ export const ReadingDetailContainer = (props: IProps) => {
           ))}
         </div>
       )}
-      <div>
-        <div>タイトル</div>
-        <div>{readingParam.bookName}</div>
-      </div>
-      <div>
-        <div>著者</div>
-        <div>{readingParam.bookAuthor}</div>
+      <div className={styles.descriptions}>
+        <div className={styles.descriptionCol}>
+          <DetailItemComponent labelText='タイトル' value={readingParam.bookName} />
+          <DetailItemComponent labelText='著者' value={readingParam.bookAuthor} />
+        </div>
+        <div className={styles.descriptionCol}>
+          <DetailItemComponent labelText='現在のページ' value={`${readingParam.currentPage} p`} />
+          <DetailItemComponent labelText='総ページ数' value={`${readingParam.totalPageCount} p`} />
+          <DetailItemComponent labelText='読み進めた割合' value={`${readRate()} %`} />
+        </div>
       </div>
       <DailyProgressCreateComponent />
       <ProgressGraphComponent reading={readingParam} />
-    </>
+    </div>
   );
 };
