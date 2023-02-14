@@ -1,12 +1,13 @@
 import { IReading } from '@/features/common/types/common';
 import styles from '@/features/readings/components/reading_item_component.module.scss';
+import Link from 'next/link';
 
 interface IProps {
   reaading: IReading;
 }
 
 export const ReadingItemComponent = (props: IProps) => {
-  const { bookName, bookAuthor, totalPageCount, currentPage } = props.reaading;
+  const { id, bookName, bookAuthor, totalPageCount, currentPage } = props.reaading;
 
   const readRate = () => {
     const place = 10;
@@ -14,7 +15,7 @@ export const ReadingItemComponent = (props: IProps) => {
   };
 
   return (
-    <div className={styles.root}>
+    <Link href={`/readings/${id}`} className={styles.root}>
       <div className={styles.col}>
         <div>タイトル</div>
         <div className={styles.value}>{bookName}</div>
@@ -33,6 +34,6 @@ export const ReadingItemComponent = (props: IProps) => {
         <div>読み終えた割合</div>
         <div className={styles.value}>{readRate()}%</div>
       </div>
-    </div>
+    </Link>
   );
 };
