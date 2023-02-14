@@ -3,12 +3,14 @@ import { useState } from 'react';
 import styles from '@/features/reading_form/reading_form_container.module.scss';
 import { createReading } from './apis/reading_form_api';
 import { ButtonComponent } from '../common/components/button_component';
+import { useRouter } from 'next/router';
 
 export const ReadingFormContainer = () => {
   const [title, setTitle] = useState<string>('');
   const [author, setAuthor] = useState<string>('');
   const [totalPageCount, setTotalPageCount] = useState<string>('');
   const [errors, setErrors] = useState<string[]>([]);
+  const router = useRouter();
 
   const create = async () => {
     const totalPageCountNum = parseInt(totalPageCount);
@@ -37,7 +39,7 @@ export const ReadingFormContainer = () => {
     }
     console.log('done');
 
-    // TODO: 読書記録詳細画面への遷移
+    router.push(`/readings/${reading.id}`);
   };
 
   return (
