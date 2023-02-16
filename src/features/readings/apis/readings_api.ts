@@ -24,7 +24,7 @@ interface IGetReadingsResponse {
 export const getReadings = async (page: number) => {
   try {
     const { metadata, readings, error } = await requestApiWithAuth<null, IGetReadingsResponse>(
-      `/v1/readings?page=${page}&page_size=1`,
+      `/v1/readings?page=${page}`,
       'GET',
     );
     return { metadata, readings, error };
