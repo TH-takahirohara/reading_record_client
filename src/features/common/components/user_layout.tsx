@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styles from '@/features/common/components/user_layout.module.scss';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 interface IProps {
   subtitle: string;
@@ -9,6 +10,13 @@ interface IProps {
 
 export const UserLayout = (props: React.PropsWithChildren<IProps>) => {
   const { subtitle, children } = props;
+  const router = useRouter();
+
+  const logout = () => {
+    localStorage.removeItem('authToken');
+    router.push('/login');
+  };
+
   return (
     <>
       <Head>
@@ -19,6 +27,11 @@ export const UserLayout = (props: React.PropsWithChildren<IProps>) => {
         <div className={styles.leftLinkArea}>
           <Link href={'/readings/create'}>新規作成</Link>
           <Link href={'/readings'}>一覧</Link>
+        </div>
+        <div className={styles.rightLinkArea}>
+          <div className={styles.logoutLink} onClick={logout}>
+            ログアウト
+          </div>
         </div>
       </div>
       <main>{children}</main>
