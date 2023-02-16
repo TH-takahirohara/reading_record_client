@@ -25,11 +25,15 @@ export const UserLayout = (props: React.PropsWithChildren<IProps>) => {
       </Head>
       <div className={styles.header}>
         <div className={styles.leftLinkArea}>
-          <Link href={'/readings/create'}>新規作成</Link>
-          <Link href={'/readings'}>一覧</Link>
+          <Link className={styles.link} href={'/readings/create'}>
+            新規作成
+          </Link>
+          <Link className={styles.link} href={'/readings'}>
+            一覧
+          </Link>
         </div>
         <div className={styles.rightLinkArea}>
-          <div className={styles.logoutLink} onClick={logout}>
+          <div className={styles.link} onClick={logout}>
             ログアウト
           </div>
         </div>
