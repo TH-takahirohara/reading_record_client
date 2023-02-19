@@ -8,8 +8,12 @@ export const RootWrapperComponent = (props: React.PropsWithChildren) => {
     <>
       <div className={styles.header}>
         <div className={styles.linkArea}>
-          <Link href='/register'>登録</Link>
-          <Link href='/login'>ログイン</Link>
+          <Link className={styles.link} href='/register'>
+            登録
+          </Link>
+          <Link className={styles.link} href='/login'>
+            ログイン
+          </Link>
         </div>
       </div>
       <main className={styles.main}>{children}</main>
