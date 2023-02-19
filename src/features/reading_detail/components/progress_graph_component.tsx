@@ -42,8 +42,8 @@ export const ProgressGraphComponent = (props: IProps) => {
           {
             data: yPages,
             borderWidth: 1,
-            backgroundColor: '#66CC33',
-            borderColor: '#66CC33',
+            backgroundColor: '#00509f',
+            borderColor: '#00509f',
           },
         ],
       }}
