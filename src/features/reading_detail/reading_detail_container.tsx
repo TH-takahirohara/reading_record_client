@@ -146,13 +146,22 @@ export const ReadingDetailContainer = (props: IProps) => {
     );
   };
 
+  const hiddenErrorArea = () => {
+    setErrors([]);
+  };
+
   return (
     <div className={styles.root}>
       {errors.length !== 0 && (
-        <div className={styles.errors}>
-          {errors.map((errorText, idx) => (
-            <div key={idx}>{errorText}</div>
-          ))}
+        <div className={styles.errorArea}>
+          <div className={styles.errors}>
+            {errors.map((errorText, idx) => (
+              <div key={idx}>{errorText}</div>
+            ))}
+          </div>
+          <div className={styles.closeError} onClick={hiddenErrorArea}>
+            ×
+          </div>
         </div>
       )}
       <div className={styles.descriptions}>

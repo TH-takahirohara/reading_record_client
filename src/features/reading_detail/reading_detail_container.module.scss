@@ -64,8 +64,25 @@
   border-radius: 4px;
 }
 
-.errors {
-  border: 2px solid red;
-  padding: 16px;
+.errorArea {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 10vh;
+  z-index: 1000;
   color: red;
+  background-color: #fff;
+  border: 2px solid red;
+}
+
+.errors {
+  padding: 16px;
+}
+
+.closeError {
+  margin: auto 0 auto auto;
+  vertical-align: middle;
+  padding-right: 24px;
+  font-size: 24px;
+  cursor: pointer;
 }
