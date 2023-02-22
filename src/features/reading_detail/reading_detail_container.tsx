@@ -132,9 +132,9 @@ export const ReadingDetailContainer = (props: IProps) => {
 
   const readRate = () => {
     const place = 10;
-    return (
-      Math.floor((readingParam.currentPage / readingParam.totalPageCount) * 100 * place) / place
-    );
+    const rate =
+      Math.floor((readingParam.currentPage / readingParam.totalPageCount) * 100 * place) / place;
+    return isNaN(rate) ? '-' : rate;
   };
 
   const DetailItemComponent = (props: { labelText: string; value: string }) => {
