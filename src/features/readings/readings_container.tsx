@@ -52,18 +52,22 @@ export const ReadingsContainer = () => {
           ))}
         </div>
       )}
-      <ReadingsComponent />
-      <ReactPaginate
-        className={styles.paginate}
-        pageCount={pageCount}
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        previousLabel='<'
-        nextLabel='>'
-        activeClassName={styles.active}
-        breakLabel='...'
-      />
+      {readings.length === 0 ? null : (
+        <>
+          <ReadingsComponent />
+          <ReactPaginate
+            className={styles.paginate}
+            pageCount={pageCount}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            previousLabel='<'
+            nextLabel='>'
+            activeClassName={styles.active}
+            breakLabel='...'
+          />
+        </>
+      )}
     </div>
   );
 };
