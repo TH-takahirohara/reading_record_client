@@ -44,6 +44,7 @@ export const RegisterContainer = () => {
           </div>
         )}
         <div className={styles.form}>
+          <div>ユーザー登録</div>
           <InputComponent
             id='name'
             type='text'

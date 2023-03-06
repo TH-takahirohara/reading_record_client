@@ -43,6 +43,7 @@ export const LoginContainer = () => {
           </div>
         )}
         <div className={styles.form}>
+          <div>ログイン</div>
           <InputComponent
             id='email'
             type='email'
